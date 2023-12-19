@@ -9,7 +9,7 @@
     <div class="px-3 pb-11 flex-1">
       <div class="h-full border-[1px] border-gray-400 p-2">
         <div>
-          <button>
+          <button class="bg-[#2055A5] text-white px-5 py-1">
             新增員工群組
           </button>
         </div>
@@ -46,7 +46,7 @@
                   10
                 </td>
                 <td>
-                  <input type="checkbox">
+                  <input name="defaultGroup" type="checkbox">
                 </td>
                 <td>
                   <div class="border-[1px] border-gray-400 text-center">

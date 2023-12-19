@@ -33,7 +33,7 @@
               </select>
             </div>
             <div>
-              <button>查詢</button>
+              <button class="bg-[#2055A5] text-white px-5 py-1">查詢</button>
             </div>
           </form>
         </div>
@@ -127,9 +127,9 @@
 
               </td>
               <td>
-                <button>
+                <router-link class="bg-[#2055A5] text-white px-5 py-1" :to="{name: 'AdminMember', params: {memberId: 123}}">
                   修改
-                </button>
+                </router-link>
               </td>
             </tr>
           </tbody>
