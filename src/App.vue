@@ -1,5 +1,4 @@
 <template>
-  <h1 class="text-3xl">Init</h1>
   <router-view></router-view>
 </template>
 
@@ -7,5 +6,12 @@
 </script>
 
 
-<style scoped>
+<style>
+body {
+  height: 100vh;
+}
+
+#app {
+  height: 100%;
+}
 </style>
