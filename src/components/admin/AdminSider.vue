@@ -12,7 +12,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/admin/membermanage" class="inline-block w-full h-full pl-8 py-1">
+            <router-link to="/admin/membermanage" class="inline-block w-full h-full pl-8 py-1" :class="{'router-link-active': $route.name === 'AdminMember'}">
               >>員工管理
             </router-link>
           </li>
@@ -52,7 +52,7 @@
 </template>
 
 <style scoped>
-.router-link-exact-active {
+.router-link-exact-active, .router-link-active {
   background-color: #6F95B2;
 }
 </style>
