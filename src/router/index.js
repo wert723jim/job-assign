@@ -7,6 +7,11 @@ const routes = [
     name: 'Home',
     component: Home,
   },
+  {
+    path: '/admin/membergroup',
+    name: 'AdminMemberGroup',
+    component: () => import('../views/admin/AdminMemberGroup.vue'),
+  }
 ]
 
 const router = createRouter({
