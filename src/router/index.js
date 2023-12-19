@@ -11,7 +11,12 @@ const routes = [
     path: '/admin/membergroup',
     name: 'AdminMemberGroup',
     component: () => import('../views/admin/AdminMemberGroup.vue'),
-  }
+  },
+  {
+    path: '/admin/membermanage',
+    name: 'AdminMemberManage',
+    component: () => import('../views/admin/AdminMemberManage.vue'),
+  },
 ]
 
 const router = createRouter({
