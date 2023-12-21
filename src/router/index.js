@@ -29,6 +29,11 @@ const routes = [
     name: 'AdminPointManage',
     component: () => import('../views/admin/AdminPointManage.vue'),
   },
+  {
+    path: '/admin/pointRecord',
+    name: 'AdminPointRecord',
+    component: () => import('../views/admin/AdminPointRecord.vue')
+  },
 ]
 
 const router = createRouter({
