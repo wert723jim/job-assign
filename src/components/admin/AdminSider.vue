@@ -47,8 +47,10 @@
               >>商品上架
             </router-link>
           </li>
-          <li class="pl-8 py-1">
-            >>公告欄
+          <li>
+            <router-link to="/admin/bulletinBoard" class="inline-block w-full h-full pl-8 py-1">
+              >>公告欄
+            </router-link>
           </li>
         </ul>
       </div>

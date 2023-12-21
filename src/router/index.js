@@ -39,6 +39,11 @@ const routes = [
     name: 'AdminProductLaunch',
     component: () => import('../views/admin/AdminProductLaunch.vue'),
   },
+  {
+    path: '/admin/bulletinBoard',
+    name: 'AdminBulletinBoard',
+    component: () => import('../views/admin/AdminBulletinBoard.vue'),
+  },
 ]
 
 const router = createRouter({
