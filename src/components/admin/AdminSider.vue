@@ -16,8 +16,10 @@
               >>員工管理
             </router-link>
           </li>
-          <li class="pl-8 py-1">
-            >>點數管理
+          <li>
+            <router-link to="/admin/pointmanage" class="inline-block w-full h-full pl-8 py-1">
+              >>點數管理
+            </router-link>
           </li>
         </ul>
       </div>
