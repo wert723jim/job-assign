@@ -32,7 +32,12 @@ const routes = [
   {
     path: '/admin/pointRecord',
     name: 'AdminPointRecord',
-    component: () => import('../views/admin/AdminPointRecord.vue')
+    component: () => import('../views/admin/AdminPointRecord.vue'),
+  },
+  {
+    path: '/admin/productLaunch',
+    name: 'AdminProductLaunch',
+    component: () => import('../views/admin/AdminProductLaunch.vue'),
   },
 ]
 

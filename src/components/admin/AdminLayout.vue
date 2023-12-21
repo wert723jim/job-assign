@@ -7,7 +7,7 @@
     </div>
     
 
-    <div class="px-3 flex-1">
+    <div class="px-3 flex-1 pb-2">
       <slot name="content"></slot>
     </div>
   </main>

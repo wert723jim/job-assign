@@ -42,15 +42,17 @@
           工具
         </div>
         <ul>
-          <li class="pl-8 py-1">
-            >>商品上架
+          <li>
+            <router-link to="/admin/productLaunch" class="inline-block w-full h-full pl-8 py-1">
+              >>商品上架
+            </router-link>
           </li>
           <li class="pl-8 py-1">
             >>公告欄
           </li>
         </ul>
       </div>
-
+      
     </div>
   </aside>
 </template>
