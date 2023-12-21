@@ -10,17 +10,17 @@ const routes = [
     },
   },
   {
-    path: '/admin/membergroup',
+    path: '/admin/memberGroup',
     name: 'AdminMemberGroup',
     component: () => import('../views/admin/AdminMemberGroup.vue'),
   },
   {
-    path: '/admin/membermanage/:memberId',
+    path: '/admin/memberManage/:memberId',
     name: 'AdminMember',
     component: () => import('../views/admin/AdminMember.vue'),
   },
   {
-    path: '/admin/membermanage',
+    path: '/admin/memberManage',
     name: 'AdminMemberManage',
     component: () => import('../views/admin/AdminMemberManage.vue'),
   },

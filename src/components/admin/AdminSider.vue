@@ -7,17 +7,17 @@
         </div>
         <ul>
           <li>
-            <router-link to="/admin/membergroup" class="inline-block w-full h-full pl-8 py-1">
+            <router-link to="/admin/memberGroup" class="inline-block w-full h-full pl-8 py-1">
               >>員工群組
             </router-link>
           </li>
           <li>
-            <router-link to="/admin/membermanage" class="inline-block w-full h-full pl-8 py-1" :class="{'router-link-active': $route.name === 'AdminMember'}">
+            <router-link to="/admin/memberManage" class="inline-block w-full h-full pl-8 py-1" :class="{'router-link-active': $route.name === 'AdminMember'}">
               >>員工管理
             </router-link>
           </li>
           <li>
-            <router-link to="/admin/pointmanage" class="inline-block w-full h-full pl-8 py-1">
+            <router-link to="/admin/pointManage" class="inline-block w-full h-full pl-8 py-1">
               >>點數管理
             </router-link>
           </li>
