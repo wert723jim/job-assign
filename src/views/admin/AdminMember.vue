@@ -13,36 +13,39 @@
       <div>
         <ul class="flex">
           <li
-            :class="{'active': chosenTab === 'accountInfo'}" 
+            :class="{ 'active': chosenTab === 'accountInfo' }"
             class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
             @click.stop.prevent="chooseTab('accountInfo')"
           >
             帳號資料
           </li>
           <li
-            :class="{'active': chosenTab === 'bankAccount'}"
+            :class="{ 'active': chosenTab === 'bankAccount' }"
             class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
             @click.stop.prevent="chooseTab('bankAccount')"
           >
             銀行帳號
           </li>
           <li
-            :class="{'active': chosenTab === 'pointRecord'}"
+            :class="{ 'active': chosenTab === 'pointRecord' }"
             class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
             @click.stop.prevent="chooseTab('pointRecord')"
-            >
+          >
             點數紀錄
           </li>
           <li
-            :class="{'active': chosenTab === 'logInRecord'}"
+            :class="{ 'active': chosenTab === 'logInRecord' }"
             class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
             @click.stop.prevent="chooseTab('logInRecord')"
-            >
+          >
             登入紀錄
           </li>
         </ul>
         <div class="border-[1px] border-gray-400 p-2">
-          <div v-if="chosenTab === 'accountInfo'" class="grid grid-cols-12 grid-rows-4 gap-2">
+          <div
+            v-if="chosenTab === 'accountInfo'"
+            class="grid grid-cols-12 grid-rows-4 gap-2"
+          >
             <div class="border-[1px] border-gray-300 col-start-1 col-span-5 row-start-1 row-span-4">
               <div class="bg-[#949DB0]">帳號資料</div>
               <div class="px-6 py-1">
@@ -65,7 +68,10 @@
                         </label>
                       </td>
                       <td>
-                        <input id="memberName" type="text">
+                        <input
+                          id="memberName"
+                          type="text"
+                        >
                       </td>
                     </tr>
                     <tr>
@@ -75,7 +81,10 @@
                         </label>
                       </td>
                       <td>
-                        <input id="memberPhoneNumber" type="text">
+                        <input
+                          id="memberPhoneNumber"
+                          type="text"
+                        >
                       </td>
                     </tr>
                     <tr>
@@ -86,7 +95,10 @@
                       </td>
                       <td>
                         <select id="memberGroup">
-                          <option value="0" selected>新進</option>
+                          <option
+                            value="0"
+                            selected
+                          >新進</option>
                         </select>
                       </td>
                     </tr>
@@ -98,7 +110,10 @@
                       </td>
                       <td>
                         <select id="memberState">
-                          <option value="0" selected>啟用</option>
+                          <option
+                            value="0"
+                            selected
+                          >啟用</option>
                         </select>
                       </td>
                     </tr>
@@ -121,7 +136,10 @@
                         </label>
                       </td>
                       <td>
-                        <input id="memberLineId" type="text">
+                        <input
+                          id="memberLineId"
+                          type="text"
+                        >
                       </td>
                     </tr>
                     <tr>
@@ -131,7 +149,12 @@
                         </label>
                       </td>
                       <td>
-                        <textarea id="memberDescription" cols="30" rows="5" class="resize-none">
+                        <textarea
+                          id="memberDescription"
+                          cols="30"
+                          rows="5"
+                          class="resize-none"
+                        >
 
                         </textarea>
                       </td>
@@ -187,14 +210,17 @@
               <div class="px-6 py-1">
                 <div class="text-center">
                   <button class="bg-[#2055A5] text-white px-5 py-1">
-                    重設登入密碼    
+                    重設登入密碼
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div v-if="chosenTab === 'bankAccount'" class="grid grid-cols-12 grid-rows-4 gap-2">
+          <div
+            v-if="chosenTab === 'bankAccount'"
+            class="grid grid-cols-12 grid-rows-4 gap-2"
+          >
             <div class="border-[1px] border-gray-300 col-start-1 col-span-5 row-start-1 row-span-2">
               <div class="bg-[#949DB0]">更改銀行資料</div>
               <div class="px-6 py-1">
@@ -208,7 +234,10 @@
                       </td>
                       <td>
                         <select id="bankName">
-                          <option value="822" selected>中國信託銀行(822)</option>
+                          <option
+                            value="822"
+                            selected
+                          >中國信託銀行(822)</option>
                         </select>
                       </td>
                     </tr>
@@ -219,7 +248,10 @@
                         </label>
                       </td>
                       <td>
-                        <input id="bankBranch" type="text">
+                        <input
+                          id="bankBranch"
+                          type="text"
+                        >
                       </td>
                     </tr>
                     <tr>
@@ -229,7 +261,10 @@
                         </label>
                       </td>
                       <td>
-                        <input id="bankAccountName" type="text">
+                        <input
+                          id="bankAccountName"
+                          type="text"
+                        >
                       </td>
                     </tr>
                     <tr>
@@ -239,7 +274,10 @@
                         </label>
                       </td>
                       <td>
-                        <input id="bankAccount" type="text">
+                        <input
+                          id="bankAccount"
+                          type="text"
+                        >
                       </td>
                     </tr>
                     <tr>
@@ -268,7 +306,10 @@
                           </label>
                         </td>
                         <td>
-                          <input id="cryptoAddress" type="text">
+                          <input
+                            id="cryptoAddress"
+                            type="text"
+                          >
                         </td>
                       </tr>
                       <tr>
@@ -326,7 +367,10 @@
             </div>
           </div>
 
-          <div v-if="chosenTab === 'pointRecord'" class="flex flex-col gap-2">
+          <div
+            v-if="chosenTab === 'pointRecord'"
+            class="flex flex-col gap-2"
+          >
             <div class="border-[1px] border-gray-300 w-4/5">
               <div class="bg-[#949DB0]">點數查詢</div>
               <div class="px-6 py-1">
@@ -338,22 +382,40 @@
                           查詢時間
                         </td>
                         <td>
-                          <label for="todayOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="todayOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             今日
                           </label>
-                          <label for="yesterdayOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="yesterdayOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             昨日
                           </label>
-                          <label for="thisWeekOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="thisWeekOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             本週
                           </label>
-                          <label for="lastWeekOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="lastWeekOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             上週
                           </label>
-                          <label for="thisMonthOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="thisMonthOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             本月
                           </label>
-                          <label for="lastMonthOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="lastMonthOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             上月
                           </label>
                         </td>
@@ -376,21 +438,36 @@
                         </td>
                         <td class="flex gap-4">
                           <div>
-                            <input id="all" type="radio" name="state" value="all">
+                            <input
+                              id="all"
+                              type="radio"
+                              name="state"
+                              value="all"
+                            >
                             <label for="all">
-                            全部
+                              全部
                             </label>
                           </div>
                           <div>
-                            <input id="addPoint" type="radio" name="state" value="add">
+                            <input
+                              id="addPoint"
+                              type="radio"
+                              name="state"
+                              value="add"
+                            >
                             <label for="addPoint">
-                            補點
+                              補點
                             </label>
                           </div>
                           <div>
-                            <input id="minusPoint" type="radio" name="state" value="minus">
+                            <input
+                              id="minusPoint"
+                              type="radio"
+                              name="state"
+                              value="minus"
+                            >
                             <label for="minusPoint">
-                            扣點
+                              扣點
                             </label>
                           </div>
                         </td>
@@ -424,13 +501,19 @@
                   頁 每頁筆數:
                   <div>
                     <select name="itemsCount">
-                      <option value="50" selected>50</option>
+                      <option
+                        value="50"
+                        selected
+                      >50</option>
                     </select>
                   </div>
                   目前第:
                   <div>
                     <select name="chosenPage">
-                      <option value="1" selected>1</option>
+                      <option
+                        value="1"
+                        selected
+                      >1</option>
                     </select>
                   </div>
                   頁
@@ -481,7 +564,10 @@
             </div>
           </div>
 
-          <div v-if="chosenTab === 'logInRecord'" class="flex flex-col gap-2">
+          <div
+            v-if="chosenTab === 'logInRecord'"
+            class="flex flex-col gap-2"
+          >
             <div class="border-[1px] border-gray-300 w-4/5">
               <div class="bg-[#949DB0]">登入查詢</div>
               <div class="px-6 py-1">
@@ -493,22 +579,40 @@
                           查詢時間
                         </td>
                         <td>
-                          <label for="todayOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="todayOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             今日
                           </label>
-                          <label for="yesterdayOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="yesterdayOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             昨日
                           </label>
-                          <label for="thisWeekOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="thisWeekOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             本週
                           </label>
-                          <label for="lastWeekOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="lastWeekOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             上週
                           </label>
-                          <label for="thisMonthOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="thisMonthOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             本月
                           </label>
-                          <label for="lastMonthOption" class="bg-[#3FC0E5] text-white px-4 py-1 mr-2">
+                          <label
+                            for="lastMonthOption"
+                            class="bg-[#3FC0E5] text-white px-4 py-1 mr-2"
+                          >
                             上月
                           </label>
                         </td>
@@ -554,13 +658,19 @@
                   頁 每頁筆數:
                   <div>
                     <select name="itemsCount">
-                      <option value="50" selected>50</option>
+                      <option
+                        value="50"
+                        selected
+                      >50</option>
                     </select>
                   </div>
                   目前第:
                   <div>
                     <select name="chosenPage">
-                      <option value="1" selected>1</option>
+                      <option
+                        value="1"
+                        selected
+                      >1</option>
                     </select>
                   </div>
                   頁
@@ -641,6 +751,7 @@ form tr td:first-child {
   @apply text-right;
   @apply pr-2;
 }
+
 form tr td input[type='text'],
 form tr td input[type='dateTime-local'] {
   @apply border-[1px];
@@ -654,7 +765,8 @@ form tr td textarea {
   @apply border-gray-300;
 }
 
-.filter-table td, .filter-table th {
+.filter-table td,
+.filter-table th {
   @apply border-[1px];
   @apply border-gray-400;
   @apply text-center;

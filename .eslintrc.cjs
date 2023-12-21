@@ -29,10 +29,10 @@ module.exports = {
 		'vue'
 	],
 	'rules': {
-		'indent': [
-			'error',
-			'tab'
-		],
+		// 'indent': [
+		// 	'error',
+		// 	'tab'
+		// ],
 		'linebreak-style': [
 			'error',
 			'unix'
@@ -43,7 +43,9 @@ module.exports = {
 		],
 		'semi': [
 			'error',
-			'always'
-		]
+			'never'
+		],
+		'vue/multi-word-component-names': 'off'
 	}
-};
+
+}
