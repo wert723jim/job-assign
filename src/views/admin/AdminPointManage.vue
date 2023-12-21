@@ -15,7 +15,11 @@
                   </label>
                 </td>
                 <td>
-                  <input name="member" id="member" type="text">
+                  <input
+                    name="member"
+                    id="member"
+                    type="text"
+                  >
                 </td>
               </tr>
               <tr>
@@ -25,8 +29,14 @@
                   </label>
                 </td>
                 <td>
-                  <select name="memberGroupName" id="memberGroupName">
-                    <option value="0" selected>全部</option>
+                  <select
+                    name="memberGroupName"
+                    id="memberGroupName"
+                  >
+                    <option
+                      value="0"
+                      selected
+                    >全部</option>
                   </select>
                 </td>
               </tr>
@@ -54,13 +64,19 @@
           頁 每頁筆數:
           <div>
             <select name="itemsCount">
-              <option value="50" selected>50</option>
+              <option
+                value="50"
+                selected
+              >50</option>
             </select>
           </div>
           目前第:
           <div>
             <select name="chosenPage">
-              <option value="1" selected>1</option>
+              <option
+                value="1"
+                selected
+              >1</option>
             </select>
           </div>
           頁
@@ -137,7 +153,7 @@
 </template>
 
 <script setup>
-import AdminLayout from '../../components/admin/AdminLayout.vue';
+import AdminLayout from '../../components/admin/AdminLayout.vue'
 </script>
 
 <style>
@@ -150,7 +166,8 @@ table td {
   @apply py-1;
 }
 
-.filter-table td, .filter-table th {
+.filter-table td,
+.filter-table th {
   border: 1px solid;
   @apply border-gray-400;
 }

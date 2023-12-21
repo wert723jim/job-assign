@@ -1,5 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
@@ -44,10 +43,16 @@ const routes = [
     name: 'AdminBulletinBoard',
     component: () => import('../views/admin/AdminBulletinBoard.vue'),
   },
+  {
+    path: '/:catchAll(.*)',
+    name: 'not-found',
+    component: () => import('../views/NotFound.vue')
+  }
 ]
 
+
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 })
 

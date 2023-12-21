@@ -46,12 +46,15 @@
                   10
                 </td>
                 <td>
-                  <input name="defaultGroup" type="checkbox">
+                  <input
+                    name="defaultGroup"
+                    type="checkbox"
+                  >
                 </td>
                 <td>
                   <div class="border-[1px] border-gray-400 text-center">
                     3000
-                  </div> 
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -71,10 +74,13 @@ import AdminSider from '../../components/admin/AdminSider.vue'
 th {
   padding: 8px;
 }
+
 td {
   padding: 4px
 }
-td, th {
+
+td,
+th {
   border: 1px solid;
   @apply border-gray-400;
 }
