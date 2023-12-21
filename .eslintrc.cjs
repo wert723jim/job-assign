@@ -29,10 +29,10 @@ module.exports = {
 		'vue'
 	],
 	'rules': {
-		'indent': [
-			'error',
-			'space'
-		],
+		// 'indent': [
+		// 	'error',
+		// 	'tab'
+		// ],
 		'linebreak-style': [
 			'error',
 			'unix'
