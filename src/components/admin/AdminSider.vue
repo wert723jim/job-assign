@@ -31,7 +31,7 @@
         <ul>
           <li>
             <router-link to="/admin/pointRecord" class="inline-block w-full h-full pl-8 py-1">
-              >>點數管理
+              >>點數紀錄
             </router-link>
           </li>
         </ul>
