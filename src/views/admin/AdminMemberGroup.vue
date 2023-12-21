@@ -35,25 +35,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="text-center">
+              <tr v-for="group in memberGroups" :key="group.id" class="text-center">
                 <td>
-                  1
+                  {{ group.id}}
                 </td>
                 <td>
-                  新進
+                  {{ group.attributes.name }}
                 </td>
                 <td>
-                  10
+                  {{ group.attributes.users.data.attributes.count}}
                 </td>
                 <td>
                   <input
                     name="defaultGroup"
                     type="checkbox"
-                  >
+                    v-model="group.attributes.isDefault"
+                  >                  
                 </td>
                 <td>
                   <div class="border-[1px] border-gray-400 text-center">
-                    3000
+                    {{ group.attributes.point_baseline}}
                   </div>
                 </td>
               </tr>
@@ -66,8 +67,23 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import AdminHeader from '../../components/admin/AdminHeader.vue'
 import AdminSider from '../../components/admin/AdminSider.vue'
+
+const memberGroups = ref([])
+
+const fetchMemberGroup = async () => {
+  const response = await fetch('https://dispatch-net.onrender.com/api/groups?fields[0]=name&fields[1]=isDefault&fields[2]=point_baseline&populate[users][count]=1', {
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
+    },
+  })
+  const { data } = await response.json()
+  memberGroups.value = data
+}
+
+fetchMemberGroup()
 </script>
 
 <style scoped>
