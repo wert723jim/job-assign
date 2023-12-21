@@ -43,7 +43,9 @@ module.exports = {
 		],
 		'semi': [
 			'error',
-			'always'
-		]
+			'never'
+		],
+		'vue/multi-word-component-names': 'off'
 	}
-};
+
+}
