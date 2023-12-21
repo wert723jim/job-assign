@@ -10,7 +10,6 @@ export default defineConfig({
 			include: ['src/**/*.ts', 'src/**/*.vue', 'src/*.ts', 'src/*.vue'],
 		}),
 	],
-	base: '/job-assign/',
 	resolve: {
 		// 配置路径别名
 		alias: {
