@@ -1,6 +1,6 @@
 <template>
   <UserHeader />
-  <main class="px-[67px] h-fit ">
+  <main class="px-4  md:px-[67px] h-fit ">
     <div class="flex-1">
       <slot></slot>
     </div>

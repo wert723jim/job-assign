@@ -1,6 +1,9 @@
 <template>
   <UserLayout>
-    <div class="grid md:grid-cols-4 grid-cols-2 gap-8 mt-[64px]">
+    <div class="my-4 md:hidden">
+      <UserSearchInput />
+    </div>
+    <div class="grid md:grid-cols-4 grid-cols-2 gap-8 md:mt-[64px]">
       <UserProduct
         v-for="product in productList"
         :key="product.id"
@@ -12,10 +15,6 @@
       v-if="!productList?.length"
       class="text-gray-400 text-center"
     >沒有商品</div>
-    <Modal
-      :isOpen="isModalOpen"
-      @closeModal="isModalOpen = false"
-    />
   </UserLayout>
 </template>
 
@@ -24,16 +23,7 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import UserLayout from '@/components/user/Layout.vue'
 import UserProduct from '@/components/user/product.vue'
-import Modal from '@/components/Modal.vue'
-
-const isModalOpen = ref(false)
-const clickFn = (url) => {
-  if (url) {
-    window.open(url)
-  } else {
-    isModalOpen.value = true
-  }
-}
+import UserSearchInput from '@/components/user/SearchInput.vue'
 
 const route = useRoute()
 const optionUrl = computed(() => route.query.search && `&filters[$and][1][name][$contains]=${route.query.search}`)

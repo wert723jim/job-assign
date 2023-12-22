@@ -1,7 +1,7 @@
 <template>
   <div
     class="w-max-[300px] h-max-[300px] rounded-lg overflow-hidden flex justify-center items-end cursor-pointer"
-    @click="emit('clickFn', props.product.attributes.url)"
+    @click="handleClick"
   >
     <img
       :src="imageUrl"
@@ -19,10 +19,20 @@
 
 <script setup>
 import CustomButton from '@/components/CustomButton.vue'
+import { inject } from 'vue'
+const connectCustomService = inject('connectCustomService')
 
 const props = defineProps(['product'])
-const emit = defineEmits(['clickFn'])
 
 const backendUrl = import.meta.env.VITE_BACKEND_HOST
 const imageUrl = backendUrl + props.product.attributes.image.data.attributes.url
+
+const handleClick = () => {
+  if (props.product.attributes.url) {
+    window.open(props.product.attributes.url)
+    return
+  } else {
+    connectCustomService()
+  }
+}
 </script>
