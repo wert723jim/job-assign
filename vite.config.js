@@ -18,4 +18,13 @@ export default defineConfig({
 			'@assets': '/assets'
 		},
 	},
+	server: {
+		proxy: {
+			'/api': {
+				target: process.env.VITE_BACKEND_HOST + '/api',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, ''),
+			},
+		},
+	},
 })
