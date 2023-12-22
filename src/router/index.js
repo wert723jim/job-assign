@@ -4,9 +4,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: {
-      name: 'AdminMemberGroup',
-    },
+    component: () => import('../views/Home.vue')
+    // redirect: {
+    //   name: 'AdminMemberGroup',
+    // },
   },
   {
     path: '/admin/memberGroup',
