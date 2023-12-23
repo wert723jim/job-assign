@@ -75,7 +75,7 @@
                   {{ group.attributes.name }}
                 </td>
                 <td>
-                  {{ group.attributes.users.data.attributes.count}}
+                  0
                 </td>
                 <td>
                   <input
@@ -281,7 +281,7 @@ const removeGroup = async (id) => {
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
       }
     })
-
+    console.log(response)
     const { data } = await response.json()
     if (!data) throw new Error('群組刪除失敗')
 
