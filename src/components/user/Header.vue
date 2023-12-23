@@ -99,7 +99,8 @@ const connectCustomService = inject('connectCustomService')
 const router = useRouter()
 const route = useRoute()
 const title = computed(() => route.path === '/point' ? '錢包'
-  : route.path === '/profile' ? '個人資料' : '')
+  : route.path === '/profile' ? '個人資料'
+    : route.path === '/announcement' ? '最新公告' : '')
 
 const token = localStorage.getItem('token')
 const isLogin = !!token

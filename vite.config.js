@@ -24,6 +24,7 @@ export default defineConfig({
 			'/api': {
 				target: process.env.VITE_BACKEND_HOST + '/api',
 				changeOrigin: true,
+				secure: false,
 				rewrite: (path) => path.replace(/^\/api/, ''),
 				headers: {
 					'Content-Type': 'application/json'
