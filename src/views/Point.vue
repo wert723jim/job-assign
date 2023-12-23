@@ -10,7 +10,7 @@
           alt="wallet"
           class="w-16"
         >
-        <span class="text-[30px] text-primary">${{ main_point }}</span>
+        <span class="text-[30px] text-primary">${{ main_point || 0 }}</span>
 
       </div>
     </div>
@@ -19,22 +19,19 @@
 
 <script setup>
 import UserLayout from '@/components/user/Layout.vue'
+import getTokenAndHeader from '@utils/getTokenAndHeader.js'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const main_point = ref(0)
 const router = useRouter()
 onMounted(async () => {
-  const token = localStorage.getItem('token')
+  const { token, headers } = getTokenAndHeader()
   if (!token) {
     router.replace('/login')
     return
   }
-  const res = await fetch('/api/users/me?fields[0]=main_point', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  const res = await fetch('/api/users/me?fields[0]=main_point', { headers })
   const data = await res.json()
   main_point.value = data.main_point
 })

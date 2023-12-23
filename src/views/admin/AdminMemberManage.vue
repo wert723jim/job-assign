@@ -1,12 +1,10 @@
 <template>
   <AdminLayout>
     <template v-slot:header>
-      <h2 class="font-semibold text-lg px-3 py-2">員工管理</h2>
+      <h2 class="font-semibold text-2xl px-3 py-2">員工管理</h2>
       <AdminModal @confirm="addMember">
         <template v-slot:buttonContent>
-          <span
-            class="inline-block text-white px-5 py-1 bg-[#2055A5]"
-          >
+          <span class="inline-block text-sm ml-4 text-white px-5 py-1 bg-[#2055A5]">
             新增員工
           </span>
         </template>
@@ -24,7 +22,11 @@
                     </label>
                   </td>
                   <td>
-                    <input type="text" id="memberUserName" v-model="memberDetail.username">
+                    <input
+                      type="text"
+                      id="memberUserName"
+                      v-model="memberDetail.username"
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -34,7 +36,11 @@
                     </label>
                   </td>
                   <td>
-                    <input type="text" id="memberPassword" v-model="memberDetail.password">
+                    <input
+                      type="text"
+                      id="memberPassword"
+                      v-model="memberDetail.password"
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -44,7 +50,11 @@
                     </label>
                   </td>
                   <td>
-                    <input type="text" id="memberNickName" v-model="memberDetail.nickname">
+                    <input
+                      type="text"
+                      id="memberNickName"
+                      v-model="memberDetail.nickname"
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -54,7 +64,11 @@
                     </label>
                   </td>
                   <td>
-                    <input type="text" id="memberPhone" v-model="memberDetail.phone">
+                    <input
+                      type="text"
+                      id="memberPhone"
+                      v-model="memberDetail.phone"
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -64,8 +78,15 @@
                     </label>
                   </td>
                   <td>
-                    <select name="" id="memberGroup" v-model="memberDetail.group">
-                      <option disabled value="0">
+                    <select
+                      name=""
+                      id="memberGroup"
+                      v-model="memberDetail.group"
+                    >
+                      <option
+                        disabled
+                        value="0"
+                      >
                         請選擇
                       </option>
                       <option value="1">
@@ -81,7 +102,11 @@
                     </label>
                   </td>
                   <td>
-                    <input type="text" id="memberLineId" v-model="memberDetail.line_id">
+                    <input
+                      type="text"
+                      id="memberLineId"
+                      v-model="memberDetail.line_id"
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -113,34 +138,7 @@
       <div class="flex flex-col gap-2">
         <div class="border-[1px] border-gray-400 px-6 py-4">
           <div>
-            <form id="memberForm">
-              <div>
-                <label for="memberInfo">
-                  帳號/姓名/電話
-                </label>
-                <input name="memberInfo" id="memberInfo" type="text" v-model="memberInfo.containString">
-              </div>
-              <div>
-                <label for="memberGroup">
-                  員工群組
-                </label>
-                <select name="memberGroup" id="memberGroup" v-model="memberInfo.group">
-                  <option value="新進">新進</option>
-                  <option value="試用期">試用期</option>
-                </select>
-              </div>
-              <div>
-                <label for="memberState">
-                  員工狀態
-                </label>
-                <select name="memberState" id="memberState" v-model="memberInfo.state">
-                  <option value="全部">全部</option>
-                </select>
-              </div>
-              <div>
-                <button class="bg-[#2055A5] text-white px-5 py-1">查詢</button>
-              </div>
-            </form>
+            <SearchForm />
           </div>
         </div>
         <div>
@@ -156,13 +154,19 @@
             頁 每頁筆數:
             <div>
               <select name="itemsCount">
-                <option value="50" selected>50</option>
+                <option
+                  value="50"
+                  selected
+                >50</option>
               </select>
             </div>
             目前第:
             <div>
               <select name="chosenPage">
-                <option value="1" selected>1</option>
+                <option
+                  value="1"
+                  selected
+                >1</option>
               </select>
             </div>
             頁
@@ -203,15 +207,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="member in members" :key="member.id" class="text-center">
+              <tr
+                v-for="member in members"
+                :key="member.id"
+                class="text-center"
+              >
                 <td>
                   {{ member.id }}
                 </td>
                 <td>
-                  {{ member.username}}
+                  {{ member.username }}
                 </td>
                 <td>
-                  {{ member.nickname}}
+                  {{ member.nickname }}
                 </td>
                 <td>
                   {{ member.phone }}
@@ -228,13 +236,16 @@
                   {{ member.createdAt }}
                 </td>
                 <td>
-                  
+
                 </td>
                 <td>
                   {{ member.note }}
                 </td>
                 <td>
-                  <router-link class="bg-[#2055A5] text-white px-5 py-1" :to="{name: 'AdminMember', params: { memberId: member.id }}">
+                  <router-link
+                    class="bg-[#2055A5] text-white px-5 py-1"
+                    :to="{ name: 'AdminMember', params: { memberId: member.id } }"
+                  >
                     修改
                   </router-link>
                 </td>
@@ -248,15 +259,15 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import getTokenAndHeader from '@utils/getTokenAndHeader.js'
+import getFilterQuery from '@utils/getFilterQuery.js'
 import AdminLayout from '../../components/admin/AdminLayout.vue'
 import AdminModal from '../../components/admin/AdminModal.vue'
+import SearchForm from '@/components/admin/SearchForm.vue'
+import { ref, reactive, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
 const members = ref([])
-const memberInfo = reactive({
-  containString: '',
-  group: '新進',
-  state: '全部',
-})
 
 const memberDetail = reactive({
   username: '',
@@ -268,12 +279,15 @@ const memberDetail = reactive({
   note: '',
 })
 
-const fetchMembers = async () => {
+const route = useRoute()
+watch(() => route.query, () => fetchMembers(route.query))
+
+const { headers } = getTokenAndHeader()
+const fetchMembers = async (query) => {
+  const filterQuery = getFilterQuery(query)
   try {
-    const response = await fetch('https://dispatch-net.onrender.com/api/users?fields[0]=username&fields[1]=nickname&fields[2]=phone&fields[3]=main_point&fields[4]=createdAt&fields[5]=note&populate[group][fields]=name&populate[login_logs][sort]=createdAt%3Adesc', {
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
-      },
+    const response = await fetch('https://dispatch-net.onrender.com/api/users?fields[0]=username&fields[1]=nickname&fields[2]=phone&fields[3]=main_point&fields[4]=createdAt&fields[5]=note&populate[group][fields]=name&populate[login_logs][sort]=createdAt%3Adesc' + filterQuery, {
+      headers
     })
     const data = await response.json()
     if (data?.error) throw new Error(data?.error?.message || 'fetch error')
@@ -287,11 +301,11 @@ fetchMembers()
 
 const addMember = async () => {
   try {
-    let { username, password, nickname, phone, group, line_id, note} = memberDetail
+    let { username, password, nickname, phone, group, line_id, note } = memberDetail
     if (!username || !password || !nickname || !phone || group === 0) throw new Error('欄位不得為空白')
     group = Number(group)
     console.log(typeof group, group)
-    const response = await fetch('https://dispatch-net.onrender.com/api/auth/local/register',{
+    const response = await fetch('https://dispatch-net.onrender.com/api/auth/local/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -339,10 +353,13 @@ const addMember = async () => {
 .filter-table th {
   padding: 8px;
 }
+
 .filter-table td {
   padding: 4px
 }
-.filter-table td, .filter-table th {
+
+.filter-table td,
+.filter-table th {
   border: 1px solid;
   @apply border-gray-400;
 }
@@ -351,7 +368,8 @@ form td {
   @apply py-1;
 }
 
-form input, form textarea {
+form input,
+form textarea {
   @apply border-[1px];
   @apply border-gray-300;
   @apply h-8;

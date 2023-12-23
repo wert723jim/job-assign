@@ -15,7 +15,8 @@ export default defineConfig({
 		// 配置路径别名
 		alias: {
 			'@': '/src',
-			'@assets': '/assets'
+			'@assets': '/assets',
+			'@utils': '/utils'
 		},
 	},
 	server: {

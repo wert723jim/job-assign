@@ -34,3 +34,13 @@
     </div>
   </header>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const token = localStorage.getItem('token')
+if (!token) {
+  router.replace('/system')
+}
+</script>
