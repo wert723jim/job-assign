@@ -12,6 +12,7 @@
   <div
     v-if="show"
     class="absolute top-0 left-0 inset-0 z-40 bg-gray-700 bg-opacity-50 "
+    @click="show = false"
   > </div>
 
   <div
