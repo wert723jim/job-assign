@@ -11,7 +11,7 @@
             type="text"
             id="username"
             placeholder="請輸入帳號"
-            :class="usernameClass"
+            :class="inputClass"
             v-model="formData.username"
             @input="error.username = ''"
           >
@@ -29,7 +29,7 @@
             type="password"
             id="password"
             placeholder="請輸入密碼"
-            :class="usernameClass"
+            :class="inputClass"
             v-model="formData.password"
             @input="error.password = ''"
           >
@@ -47,7 +47,7 @@
             type="text"
             id="captcha"
             placeholder="請輸入驗證碼"
-            :class="usernameClass"
+            :class="inputClass"
             @input="error.captcha = ''"
           >
           <span
@@ -91,7 +91,7 @@ import { useRouter } from 'vue-router'
 import CustomButton from '../components/CustomButton.vue'
 
 const fieldGroupClass = 'flex flex-col mt-8 justify-center'
-const usernameClass = 'border rounded-md w-[330px] outline-primary h-10 px-2 mt-2'
+const inputClass = 'border rounded-md w-[330px] outline-primary h-10 px-2 mt-2'
 const errorClass = 'text-red-400'
 
 const formData = reactive({
@@ -136,8 +136,8 @@ const handleSubmit = async () => {
   }
 
   if (data.user.id) {
-    console.log('login success', data.jwt)
     localStorage.setItem('token', data.jwt)
+    router.replace('/')
   }
 }
 

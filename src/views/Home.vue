@@ -8,7 +8,6 @@
         v-for="product in productList"
         :key="product.id"
         :product="product"
-        @clickFn="clickFn"
       />
     </div>
     <div
