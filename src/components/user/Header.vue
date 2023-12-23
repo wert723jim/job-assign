@@ -50,8 +50,6 @@ import { useRoute } from 'vue-router'
 
 const connectCustomService = inject('connectCustomService')
 
-
 const router = useRouter()
 const route = useRoute()
-console.log(route.path)
 </script>
