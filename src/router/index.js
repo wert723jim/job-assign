@@ -10,6 +10,11 @@ const routes = [
     // },
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue')
+  },
+  {
     path: '/admin/memberGroup',
     name: 'AdminMemberGroup',
     component: () => import('../views/admin/AdminMemberGroup.vue'),

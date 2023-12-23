@@ -15,6 +15,7 @@
       <div class="hidden md:flex gap-5">
         <CustomButton
           text="登入"
+          v-if="route.path !== '/login'"
           @click="() => router.push('/login')"
         />
         <CustomButton
@@ -23,13 +24,14 @@
           @click="connectCustomService"
         />
         <span
-          class="text-gray-400 my-auto cursor-pointer"
+          class="text-gray-400 my-auto cursor-pointer whitespace-nowrap"
           @click="connectCustomService"
         >
           業主專區
         </span>
       </div>
       <img
+        v-if="route.path !== '/login'"
         src="@/assets/bell.svg"
         class="w-6 cursor-pointer"
         alt="bell"
@@ -43,10 +45,13 @@ import UserSearchInput from '@/components/user/SearchInput.vue'
 import CustomButton from '@/components/CustomButton.vue'
 import MobileMenu from '@/components/user/MobileMenu.vue'
 import { inject } from 'vue'
+import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 const connectCustomService = inject('connectCustomService')
 
-import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
+console.log(route.path)
 </script>
