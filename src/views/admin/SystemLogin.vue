@@ -123,7 +123,9 @@ const handleSubmit = async () => {
   document.getElementById('captcha').value = ''
   generateCaptcha()
 
-  const res = await fetch('/api/auth/local', {
+
+  const baseUrl = import.meta.env.VITE_BACKEND_HOST
+  const res = await fetch(baseUrl + '/api/auth/local', {
     method: 'POST',
     body: JSON.stringify({
       identifier: formData.username,

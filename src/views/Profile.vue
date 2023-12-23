@@ -80,7 +80,8 @@ onMounted(async () => {
     router.replace('/login')
     return
   }
-  const res = await fetch('/api/users/me?fields[0]=username&fields[1]=nickname&fields[2]=phone', {
+  const baseUrl = import.meta.env.VITE_BACKEND_HOST
+  const res = await fetch(baseUrl + '/api/users/me?fields[0]=username&fields[1]=nickname&fields[2]=phone', {
     headers: {
       Authorization: `Bearer ${token}`
     }

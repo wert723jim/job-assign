@@ -108,7 +108,8 @@ const isLogin = !!token
 const main_point = ref(0)
 onMounted(async () => {
   if (isLogin) {
-    const res = await fetch('/api/users/me?fields[0]=main_point', {
+    const baseUrl = import.meta.env.VITE_BACKEND_HOST
+    const res = await fetch(baseUrl + '/api/users/me?fields[0]=main_point', {
       headers: {
         Authorization: `Bearer ${token}`
       }

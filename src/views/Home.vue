@@ -30,7 +30,8 @@ const optionUrl = computed(() => route.query.search && `&filters[$and][1][name][
 watch(() => route.query, () => getProducts(optionUrl.value))
 const productList = ref(null)
 const getProducts = async (optionUrl) => {
-  const res = await fetch('/api/products?fields[0]=name&fields[1]=url&populate[image][fields]=url&filters[$and][0][isDisplay]=true' + optionUrl || '')
+  const baseUrl = import.meta.env.VITE_BACKEND_HOST
+  const res = await fetch(baseUrl + '/api/products?fields[0]=name&fields[1]=url&populate[image][fields]=url&filters[$and][0][isDisplay]=true' + optionUrl || '')
   const data = await res.json()
   productList.value = data.data
 }

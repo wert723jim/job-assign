@@ -31,7 +31,8 @@ onMounted(async () => {
     router.replace('/login')
     return
   }
-  const res = await fetch('/api/users/me?fields[0]=main_point', { headers })
+  const baseUrl = import.meta.env.VITE_BACKEND_HOST
+  const res = await fetch(baseUrl + '/api/users/me?fields[0]=main_point', { headers })
   const data = await res.json()
   main_point.value = data.main_point
 })

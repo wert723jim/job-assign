@@ -72,8 +72,10 @@ const options = reactive({
   group: [],
 })
 
+
 onMounted(async () => {
-  const res = await fetch('/api/groups?fields[0]=name', { headers })
+  const baseUrl = import.meta.env.VITE_BACKEND_HOST
+  const res = await fetch(baseUrl + '/api/groups?fields[0]=name', { headers })
   const { data } = await res.json()
 
   options.group = data?.map(group => ({ id: group.id, name: group.attributes.name }))

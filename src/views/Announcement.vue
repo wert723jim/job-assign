@@ -26,7 +26,8 @@ const an = {
 
 
 onMounted(async () => {
-  const res = await fetch('/api/announcements')
+  const baseUrl = import.meta.env.VITE_BACKEND_HOST
+  const res = await fetch(baseUrl + '/api/announcements')
   const data = await res.json()
   console.log(data)
 
