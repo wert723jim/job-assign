@@ -4,9 +4,15 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: {
-      name: 'AdminMemberGroup',
-    },
+    component: () => import('../views/Home.vue')
+    // redirect: {
+    //   name: 'AdminMemberGroup',
+    // },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/admin/memberGroup',

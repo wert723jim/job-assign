@@ -10,10 +10,21 @@ export default defineConfig({
 			include: ['src/**/*.ts', 'src/**/*.vue', 'src/*.ts', 'src/*.vue'],
 		}),
 	],
+	// base: '/job-assign/',
 	resolve: {
 		// 配置路径别名
 		alias: {
 			'@': '/src',
+			'@assets': '/assets'
+		},
+	},
+	server: {
+		proxy: {
+			'/api': {
+				target: process.env.VITE_BACKEND_HOST + '/api',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, ''),
+			},
 		},
 	},
 })
