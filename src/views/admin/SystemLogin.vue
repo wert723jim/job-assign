@@ -3,6 +3,7 @@
     <div class="flex justify-center mt-[40px]">
       <form @submit.prevent="handleSubmit">
         <div :class="fieldGroupClass">
+          <h1 class="text-primary text-[30px] text-center mb-4 -mt-4">後台登入</h1>
           <label
             for="username"
             class="text-primary"
@@ -137,8 +138,9 @@ const handleSubmit = async () => {
 
   if (data.user.id) {
     localStorage.setItem('token', data.jwt)
-    router.replace('/')
+    router.replace('/admin')
   }
+
 }
 
 const router = useRouter()

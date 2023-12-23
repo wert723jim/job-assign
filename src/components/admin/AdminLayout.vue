@@ -5,7 +5,7 @@
     <div class="flex items-center">
       <slot name="header"></slot>
     </div>
-    
+
 
     <div class="px-3 flex-1 pb-2">
       <slot name="content"></slot>

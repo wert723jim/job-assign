@@ -1,7 +1,6 @@
 <template>
   <AdminHeader></AdminHeader>
   <AdminSider></AdminSider>
-
   <main class="pl-40 h-full flex flex-col pt-11">
     <div>
       <h2 class="font-semibold text-lg px-3 py-2">員工群組</h2>
@@ -27,13 +26,21 @@
                   <label for="groupName">
                     群組名稱:
                   </label>
-                  <input v-model="groupDetail.name" type="text" id="groupName">
+                  <input
+                    v-model="groupDetail.name"
+                    type="text"
+                    id="groupName"
+                  >
                 </div>
                 <div class="flex flex-col">
                   <label for="pointBaseLine">
                     門檻點數設定:
                   </label>
-                  <input v-model="groupDetail.pointBaseLine" type="number" id="pointBaseLine">
+                  <input
+                    v-model="groupDetail.pointBaseLine"
+                    type="number"
+                    id="pointBaseLine"
+                  >
                 </div>
               </form>
             </div>
@@ -67,9 +74,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="group in memberGroups" :key="group.id" class="text-center">
+              <tr
+                v-for="group in memberGroups"
+                :key="group.id"
+                class="text-center"
+              >
                 <td>
-                  {{ group.id}}
+                  {{ group.id }}
                 </td>
                 <td>
                   {{ group.attributes.name }}
@@ -97,8 +108,8 @@
                       @confirm="editGroup"
                     >
                       <template v-slot:buttonContent>
-                        <span 
-                          class="inline-block text-white px-5 py-1 bg-[#2055A5]" 
+                        <span
+                          class="inline-block text-white px-5 py-1 bg-[#2055A5]"
                           @click="toGroupDetail(group.attributes.name, group.attributes.point_baseline, group.attributes.isDefault)"
                         >
                           編輯
@@ -114,19 +125,30 @@
                               <label for="groupName">
                                 群組名稱:
                               </label>
-                              <input v-model="groupDetail.name" type="text" id="groupName">
+                              <input
+                                v-model="groupDetail.name"
+                                type="text"
+                                id="groupName"
+                              >
                             </div>
                             <div class="flex flex-col">
                               <label for="pointBaseLine">
                                 門檻點數設定:
                               </label>
-                              <input v-model="groupDetail.pointBaseLine" type="number" id="pointBaseLine">
+                              <input
+                                v-model="groupDetail.pointBaseLine"
+                                type="number"
+                                id="pointBaseLine"
+                              >
                             </div>
                             <div class="flex items-center gap-2">
                               <label for="groupDefault">
                                 預設群組
                               </label>
-                              <input type="checkbox" v-model="groupDetail.isDefault">
+                              <input
+                                type="checkbox"
+                                v-model="groupDetail.isDefault"
+                              >
                             </div>
                           </form>
                         </div>
@@ -135,7 +157,10 @@
                         編輯
                       </template>
                     </AdminModal>
-                    <button class="bg-red-600 text-white px-5 py-1" @click.stop.prevent="removeGroup(group.id)">
+                    <button
+                      class="bg-red-600 text-white px-5 py-1"
+                      @click.stop.prevent="removeGroup(group.id)"
+                    >
                       刪除
                     </button>
                   </div>
@@ -163,7 +188,7 @@ const groupDetail = reactive({
 })
 
 const fetchMemberGroup = async () => {
-  try{
+  try {
     const response = await fetch('https://dispatch-net.onrender.com/api/groups?fields[0]=name&fields[1]=isDefault&fields[2]=point_baseline&populate[users][count]=1', {
       headers: {
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
@@ -220,10 +245,10 @@ const addGroup = async () => {
         },
       },
     })
-  } catch(err) {
+  } catch (err) {
     console.log(err)
   }
-  
+
 }
 
 const toGroupDetail = (name, pointBaseLine, isDefault) => {
@@ -234,7 +259,7 @@ const toGroupDetail = (name, pointBaseLine, isDefault) => {
 }
 
 const editGroup = async (id) => {
-  try{
+  try {
     const response = await fetch(`https://dispatch-net.onrender.com/api/groups/${id}`, {
       method: 'PUT',
       headers: {
@@ -250,7 +275,7 @@ const editGroup = async (id) => {
       })
     })
 
-    const {data} = await response.json()
+    const { data } = await response.json()
     if (!data) throw new Error('更新群組失敗')
     const { name, point_baseline, isDefault } = data.attributes
 
@@ -265,7 +290,7 @@ const editGroup = async (id) => {
   } catch (err) {
     console.log(err)
   }
-  
+
 }
 
 const removeGroup = async (id) => {
