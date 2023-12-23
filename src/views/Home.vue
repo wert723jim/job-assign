@@ -15,7 +15,6 @@
       class="text-gray-400 text-center"
     >沒有商品</div>
   </UserLayout>
-  {{ url }}
 </template>
 
 <script setup>
@@ -25,15 +24,13 @@ import UserLayout from '@/components/user/Layout.vue'
 import UserProduct from '@/components/user/Product.vue'
 import UserSearchInput from '@/components/user/SearchInput.vue'
 
-const url = import.meta.env.VITE_BACKEND_HOST
-
 const route = useRoute()
 const optionUrl = computed(() => route.query.search && `&filters[$and][1][name][$contains]=${route.query.search}`)
 
 watch(() => route.query, () => getProducts(optionUrl.value))
 const productList = ref(null)
 const getProducts = async (optionUrl) => {
-  const res = await fetch('/api/products?fields[0]=name&fields[1]=url&populate[image][fields]=url&filters[$and][0][isDisplay]=true' + optionUrl)
+  const res = await fetch('/api/products?fields[0]=name&fields[1]=url&populate[image][fields]=url&filters[$and][0][isDisplay]=true' + optionUrl || '')
   const data = await res.json()
   productList.value = data.data
 }
