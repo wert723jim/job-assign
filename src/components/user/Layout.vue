@@ -12,5 +12,5 @@
 
 
 <script setup>
-import UserHeader from '@/components/user/header.vue'
+import UserHeader from '@/components/user/Header.vue'
 </script>
