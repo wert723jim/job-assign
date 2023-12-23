@@ -21,7 +21,7 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import UserLayout from '@/components/user/Layout.vue'
-import UserProduct from '@/components/user/product.vue'
+import UserProduct from '@/components/user/Product.vue'
 import UserSearchInput from '@/components/user/SearchInput.vue'
 
 const route = useRoute()
