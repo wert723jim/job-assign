@@ -131,6 +131,9 @@ const handleSubmit = async () => {
       identifier: formData.username,
       password: formData.password
     }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   })
   const data = await res.json()
   if (res.status === 400 && data.error.message === 'Invalid identifier or password') {

@@ -7,7 +7,8 @@ export default function getTokenAndHeader() {
     }
     return {
         token, headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
     }
 }

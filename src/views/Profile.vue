@@ -83,7 +83,8 @@ onMounted(async () => {
   const baseUrl = import.meta.env.VITE_BACKEND_HOST
   const res = await fetch(baseUrl + '/api/users/me?fields[0]=username&fields[1]=nickname&fields[2]=phone', {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     }
   })
   const data = await res.json()
