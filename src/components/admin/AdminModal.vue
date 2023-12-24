@@ -7,11 +7,14 @@
     </button>
     <Teleport to="body">
       <div v-if="modalShow" class="absolute top-0 bottom-0 left-0 right-0 bg-black/30">
-        <div class="w-1/4 mx-auto mt-[200px]">
-          <div class="bg-[#2DBBDB] text-center py-1">
+        <div class="w-max mx-auto mt-[200px]">
+          <div class="relative bg-[#2DBBDB] text-center py-1">
             <slot name="header">
               template header
             </slot>
+            <div class="absolute top-0 right-0 py-1 pr-2">
+              <button @click.prevent.stop="modalClose">X</button>
+            </div>
           </div>
           <div class="bg-white p-4">
             <slot name="content">
