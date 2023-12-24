@@ -152,10 +152,6 @@
   </AdminLayout>
 </template>
 
-<script setup>
-import AdminLayout from '../../components/admin/AdminLayout.vue'
-</script>
-
 <style>
 form td:first-child {
   @apply text-right;

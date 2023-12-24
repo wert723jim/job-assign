@@ -14,28 +14,28 @@
         <ul class="flex">
           <li
             :class="{ 'active': chosenTab === 'accountInfo' }"
-            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
+            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400 cursor-pointer"
             @click.stop.prevent="chooseTab('accountInfo')"
           >
             帳號資料
           </li>
           <li
             :class="{ 'active': chosenTab === 'bankAccount' }"
-            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
+            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400 cursor-pointer"
             @click.stop.prevent="chooseTab('bankAccount')"
           >
             銀行帳號
           </li>
           <li
             :class="{ 'active': chosenTab === 'pointRecord' }"
-            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
+            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400 cursor-pointer"
             @click.stop.prevent="chooseTab('pointRecord')"
           >
             點數紀錄
           </li>
           <li
             :class="{ 'active': chosenTab === 'logInRecord' }"
-            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400"
+            class="rounded-tl-xl rounded-tr-md px-6 border-t-[1px] border-x-[1px] border-gray-400 cursor-pointer"
             @click.stop.prevent="chooseTab('logInRecord')"
           >
             登入紀錄
@@ -47,7 +47,7 @@
             class="grid grid-cols-12 grid-rows-4 gap-2"
           >
             <div class="border-[1px] border-gray-300 col-start-1 col-span-5 row-start-1 row-span-4">
-              <div class="bg-[#949DB0]">帳號資料</div>
+              <div class="bg-[#949DB0] pl-2">帳號資料</div>
               <div class="px-6 py-1">
                 <form id="memberInfo">
                   <table>
@@ -172,7 +172,7 @@
               </div>
             </div>
             <div class="border-[1px] border-gray-300 col-start-6 col-span-5  row-start-1 row-span-1">
-              <div class="bg-[#87AE91]">錢包紀錄</div>
+              <div class="bg-[#87AE91] pl-2">錢包紀錄</div>
               <div class="px-6 py-1">
                 <div class="flex items-center">
                   <span class="basis-1/4 text-right mr-2">
@@ -185,7 +185,7 @@
               </div>
             </div>
             <div class="border-[1px] border-gray-300 col-start-6 col-span-5 row-start-2 row-span-1">
-              <div class="bg-[#87AE91]">點數資訊</div>
+              <div class="bg-[#87AE91] pl-2">點數資訊</div>
               <div class="px-6 py-1 flex flex-col gap-2">
                 <div class="flex items-center">
                   <span class="basis-1/4 text-right mr-2">
@@ -206,7 +206,7 @@
               </div>
             </div>
             <div class="border-[1px] border-gray-300 col-start-6 col-span-5 row-start-4 row-span-1">
-              <div class="bg-[#87AE91]">密碼管理</div>
+              <div class="bg-[#87AE91] pl-2">密碼管理</div>
               <div class="px-6 py-1">
                 <div class="text-center">
                   <button class="bg-[#2055A5] text-white px-5 py-1">
@@ -727,10 +727,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import AdminHeader from '../../components/admin/AdminHeader.vue'
-import AdminSider from '../../components/admin/AdminSider.vue'
-
 const chosenTab = ref('accountInfo')
 
 const chooseTab = (tabName) => {
