@@ -59,9 +59,7 @@
 </template>
 
 <script setup>
-import UserLayout from '@/components/user/Layout.vue'
-import { onMounted, reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import fetchWithToken from '../../utils/fetchFn'
 
 const fieldGroupClass = 'flex flex-col mt-8 justify-center'
 const inputClass = 'border rounded-md w-[330px] outline-primary h-10 px-2 mt-2 text-gray-400'
@@ -73,21 +71,8 @@ const formData = reactive({
   phone: '',
 })
 
-const router = useRouter()
 onMounted(async () => {
-  const token = localStorage.getItem('token')
-  if (!token) {
-    router.replace('/login')
-    return
-  }
-  const baseUrl = import.meta.env.VITE_BACKEND_HOST
-  const res = await fetch(baseUrl + '/api/users/me?fields[0]=username&fields[1]=nickname&fields[2]=phone', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
-  const data = await res.json()
+  const data = await fetchWithToken('/api/users/me?fields[0]=username&fields[1]=nickname&fields[2]=phone')
   formData.username = data.username
   formData.nickname = data.nickname
   formData.phone = data.phone

@@ -1,5 +1,42 @@
-export default function fetchFn(url) {
+import getToken from '@utils/getToken.js'
+
+export default async function fetchWithToken(url, method = 'get', body = undefined) {
     const baseUrl = import.meta.env.VITE_BACKEND_HOST
-    console.log(baseUrl, url)
+    const token = getToken()
+
+    try {
+        const res = await fetch(baseUrl + url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            method,
+            body: JSON.stringify(body)
+        })
+        return await res.json()
+    } catch (err) {
+        console.log('fetch error', url)
+        console.log(err)
+    }
 }
+
+export async function fetchWithoutToken(url, method = 'get', body = undefined) {
+    const baseUrl = import.meta.env.VITE_BACKEND_HOST
+    try {
+        const res = await fetch(baseUrl + url, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method,
+            body: JSON.stringify(body)
+        })
+        const data = await res.json()
+        return data
+    } catch (err) {
+        console.log('fetch error', url)
+        console.log(err)
+    }
+}
+
+
 

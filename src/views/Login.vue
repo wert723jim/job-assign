@@ -85,10 +85,7 @@
 </template>
 
 <script setup>
-import UserLayout from '@/components/user/Layout.vue'
-import { onMounted, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import CustomButton from '@/components/CustomButton.vue'
+import { fetchWithoutToken } from '@utils/fetchFn'
 
 const fieldGroupClass = 'flex flex-col mt-8 justify-center'
 const inputClass = 'border rounded-md w-[330px] outline-primary h-10 px-2 mt-2'
@@ -106,6 +103,7 @@ const error = reactive({
   returnError: ''
 })
 
+const router = useRouter()
 const handleSubmit = async () => {
   if (!formData.username) {
     error.username = '帳號不能為空'
@@ -122,20 +120,19 @@ const handleSubmit = async () => {
   document.getElementById('captcha').value = ''
   generateCaptcha()
 
-  const baseUrl = import.meta.env.VITE_BACKEND_HOST
-  const res = await fetch(baseUrl + '/api/auth/local', {
-    method: 'POST',
-    body: JSON.stringify({
-      identifier: formData.username,
-      password: formData.password
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
+  const data = await fetchWithoutToken('/api/auth/local', 'POST', {
+    identifier: formData.username,
+    password: formData.password
   })
-  const data = await res.json()
-  if (res.status === 400 && data.error.message === 'Invalid identifier or password') {
+
+  if (data?.error?.status === 400 && data.error.message === 'Invalid identifier or password') {
     error.returnError = '帳號或密碼錯誤'
+    return
+  }
+
+  if (data.user.isAdmin) {
+    localStorage.setItem('token', data.jwt)
+    router.replace('/admin')
     return
   }
 
@@ -145,7 +142,6 @@ const handleSubmit = async () => {
   }
 }
 
-const router = useRouter()
 onMounted(() => {
   if (localStorage.getItem('token')) {
     router.replace('/')

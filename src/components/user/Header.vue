@@ -87,12 +87,7 @@
 </template>
 
 <script setup >
-import UserSearchInput from '@/components/user/SearchInput.vue'
-import CustomButton from '@/components/CustomButton.vue'
-import MobileMenu from '@/components/user/MobileMenu.vue'
-import { computed, inject, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useRoute } from 'vue-router'
+import fetchWithToken from '../../../utils/fetchFn'
 
 const connectCustomService = inject('connectCustomService')
 
@@ -108,18 +103,9 @@ const isLogin = !!token
 const main_point = ref(0)
 onMounted(async () => {
   if (isLogin) {
-    const baseUrl = import.meta.env.VITE_BACKEND_HOST
-    const res = await fetch(baseUrl + '/api/users/me?fields[0]=main_point', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await res.json()
-    if (data.id) [
-      main_point.value = data.main_point
-    ]
-  }
+    const data = await fetchWithToken('/api/users/me?fields[0]=main_point')
+    main_point.value = data.main_point
+}
 })
 
 const logout = () => {

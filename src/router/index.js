@@ -27,11 +27,6 @@ const routes = [
     component: () => import('../views/Announcement.vue')
   },
   {
-    path: '/system',
-    name: 'system',
-    component: () => import('../views/admin/SystemLogin.vue')
-  },
-  {
     path: '/admin',
     redirect: {
       name: 'AdminMemberGroup',

@@ -18,22 +18,11 @@
 </template>
 
 <script setup>
-import UserLayout from '@/components/user/Layout.vue'
-import getTokenAndHeader from '@utils/getTokenAndHeader.js'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import fetchWithToken from '@utils/fetchFn'
 
 const main_point = ref(0)
-const router = useRouter()
 onMounted(async () => {
-  const { token, headers } = getTokenAndHeader()
-  if (!token) {
-    router.replace('/login')
-    return
-  }
-  const baseUrl = import.meta.env.VITE_BACKEND_HOST
-  const res = await fetch(baseUrl + '/api/users/me?fields[0]=main_point', { headers })
-  const data = await res.json()
+  const data = await fetchWithToken('/api/users/me?fields[0]=main_point')
   main_point.value = data.main_point
 })
 
