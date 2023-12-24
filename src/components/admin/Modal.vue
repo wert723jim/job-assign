@@ -6,7 +6,10 @@
       </slot>
     </button>
     <Teleport to="body">
-      <div v-if="modalShow" class="absolute top-0 bottom-0 left-0 right-0 bg-black/30">
+      <div
+        v-if="modalShow"
+        class="absolute top-0 bottom-0 left-0 right-0 bg-black/30"
+      >
         <div class="w-1/4 mx-auto mt-[200px]">
           <div class="bg-[#2DBBDB] text-center py-1">
             <slot name="header">
@@ -18,10 +21,16 @@
               template content
             </slot>
             <div class="flex justify-end gap-2 mt-10">
-              <button @click.prevent.stop="modalClose" class="bg-[#A9A9A9] text-white px-5 py-1">
+              <button
+                @click.prevent.stop="modalClose"
+                class="bg-[#A9A9A9] text-white px-5 py-1"
+              >
                 取消
               </button>
-              <button @click.prevent.stop="modalConfirm" class="bg-[#2055A5] text-white px-5 py-1">
+              <button
+                @click.prevent.stop="modalConfirm"
+                class="bg-[#2055A5] text-white px-5 py-1"
+              >
                 <slot name="confirmButtonContent">
                   template confirmButtonContent
                 </slot>
@@ -35,7 +44,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 const props = defineProps({
   groupId: {
     type: Number,

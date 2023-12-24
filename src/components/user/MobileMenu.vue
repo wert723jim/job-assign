@@ -24,17 +24,44 @@
       @click="show = false"
     > X </div>
     <router-link
+      v-if="!isLogin"
       to="/login"
       :class="navClass"
     >登入</router-link>
-    <div :class="navBorder"></div>
+    <div
+      :class="navBorder"
+      v-if="!isLogin"
+    ></div>
     <div
       :class="navClass"
       @click="connectCustomService"
     >業主專區</div>
     <div :class="navBorder"></div>
+    <!-- show wher login -->
+    <div v-if="isLogin">
+      <div
+        :class="navClass"
+        @click="router.push('/')"
+      >首頁</div>
+      <div :class="navBorder"></div>
+      <div
+        :class="navClass"
+        @click="router.push('/point')"
+      >錢包</div>
+      <div :class="navBorder"></div>
+      <div
+        :class="navClass"
+        @click="router.push('/profile')"
+      >個人資料</div>
+      <div :class="navBorder"></div>
+      <div
+        :class="navClass"
+        @click="logout"
+      >登出</div>
+    </div>
     <div
       :class="navClass"
+      v-if="!isLogin"
       @click="connectCustomService"
     >註冊</div>
   </div>
@@ -42,11 +69,20 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { inject } from 'vue'
 const connectCustomService = inject('connectCustomService')
+
+const router = useRouter()
+const token = localStorage.getItem('token')
+const isLogin = !!token
 
 const show = ref(false)
 const navClass = 'bg--300 p-5 text-gray-500 cursor-pointer'
 const navBorder = 'border-b border-gray-400'
 
+const logout = () => {
+  localStorage.setItem('token', '')
+  router.replace('/login')
+}
 </script>

@@ -5,14 +5,32 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue')
-    // redirect: {
-    //   name: 'AdminMemberGroup',
-    // },
   },
   {
     path: '/login',
     name: 'login',
     component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/point',
+    name: 'point',
+    component: () => import('../views/Point.vue')
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/Profile.vue')
+  },
+  {
+    path: '/announcement',
+    name: 'announcement',
+    component: () => import('../views/Announcement.vue')
+  },
+  {
+    path: '/admin',
+    redirect: {
+      name: 'AdminMemberGroup',
+    },
   },
   {
     path: '/admin/memberGroup',

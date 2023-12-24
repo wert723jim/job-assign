@@ -8,7 +8,6 @@
         v-for="product in productList"
         :key="product.id"
         :product="product"
-        @clickFn="clickFn"
       />
     </div>
     <div
@@ -19,11 +18,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import UserLayout from '@/components/user/Layout.vue'
-import UserProduct from '@/components/user/product.vue'
-import UserSearchInput from '@/components/user/SearchInput.vue'
+import { fetchWithoutToken } from '@utils/fetchFn.js'
 
 const route = useRoute()
 const optionUrl = computed(() => route.query.search && `&filters[$and][1][name][$contains]=${route.query.search}`)
@@ -31,9 +26,9 @@ const optionUrl = computed(() => route.query.search && `&filters[$and][1][name][
 watch(() => route.query, () => getProducts(optionUrl.value))
 const productList = ref(null)
 const getProducts = async (optionUrl) => {
-  const res = await fetch('/api/products?fields[0]=name&fields[1]=url&populate[image][fields]=url&filters[$and][0][isDisplay]=true' + optionUrl)
-  const data = await res.json()
-  productList.value = data.data
+  const url = '/api/products?fields[0]=name&fields[1]=url&populate[image][fields]=url&filters[$and][0][isDisplay]=true' + optionUrl || ''
+  const { data } = await fetchWithoutToken(url)
+  productList.value = data
 }
 getProducts()
 
