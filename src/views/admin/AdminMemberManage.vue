@@ -19,6 +19,7 @@
                   <td>
                     <label for="memberUserName">
                       員工帳號
+                      <span class="text-red-400 -ml-1">*</span>
                     </label>
                   </td>
                   <td>
@@ -33,6 +34,7 @@
                   <td>
                     <label for="memberPassword">
                       登入密碼
+                      <span class="text-red-400 -ml-1">*</span>
                     </label>
                   </td>
                   <td>
@@ -47,6 +49,7 @@
                   <td>
                     <label for="memberNickName">
                       員工姓名
+                      <span class="text-red-400 -ml-1">*</span>
                     </label>
                   </td>
                   <td>
@@ -61,6 +64,7 @@
                   <td>
                     <label for="memberPhone">
                       電話
+                      <span class="text-red-400 -ml-1">*</span>
                     </label>
                   </td>
                   <td>
@@ -81,17 +85,14 @@
                     <select
                       name=""
                       id="memberGroup"
+                      class="mx-3 w-[70px] text-sm bg-gray-300 p-1 rounded-xl"
                       v-model="memberDetail.group"
                     >
                       <option
-                        disabled
-                        value="0"
-                      >
-                        請選擇
-                      </option>
-                      <option value="1">
-                        新進
-                      </option>
+                        v-for="group in groupOptions"
+                        :key="group.id"
+                        :value="group.id"
+                      >{{ group.name }}</option>
                     </select>
                   </td>
                 </tr>
@@ -138,14 +139,14 @@
       <div class="flex flex-col gap-2">
         <div class="border-[1px] border-gray-400 px-6 py-4">
           <div>
-            <SearchForm />
+            <AdminSearchForm :groupOptions="groupOptions" />
           </div>
         </div>
         <div>
           <div class="flex p-2 border-[1px] border-gray-400">
             共
             <span>
-              220
+              {{ pagination.allCount }}
             </span>
             筆資料，總頁數
             <span>
@@ -173,7 +174,7 @@
           </div>
           <table class="filter-table w-full">
             <thead>
-              <tr class="bg-[#7B7B7B] text-white">
+              <tr class="bg-[#7B7B7B] text-white whitespace-nowrap">
                 <th>
                   編號
                 </th>
@@ -259,70 +260,77 @@
 </template>
 
 <script setup>
-import getTokenAndHeader from '@utils/getTokenAndHeader.js'
-import getFilterQuery from '@utils/getFilterQuery.js'
-import AdminLayout from '../../components/admin/AdminLayout.vue'
-import AdminModal from '../../components/admin/AdminModal.vue'
-import SearchForm from '@/components/admin/SearchForm.vue'
-import { ref, reactive, watch } from 'vue'
-import { useRoute } from 'vue-router'
-
-const members = ref([])
+import getFilterQuery from '@utils/getFilterQuery'
+import fetchWithToken, { fetchWithoutToken } from '@utils/fetchFn'
+import qs from 'qs'
 
 const memberDetail = reactive({
   username: '',
   password: '',
   nickname: '',
   phone: '',
-  group: 0,
+  group: undefined,
   line_id: '',
   note: '',
+})
+
+const groupOptions = ref([])
+
+onMounted(async () => {
+  const { data } = await fetchWithToken('/api/groups?fields[0]=name&fields[1]=isDefault')
+  groupOptions.value = data?.map(group => ({ id: group.id, name: group.attributes.name }))
+  memberDetail.group = data?.find(group => group.attributes.isDefault).id
 })
 
 const route = useRoute()
 watch(() => route.query, () => fetchMembers(route.query))
 
-const { headers } = getTokenAndHeader()
+const pagination = reactive({
+  page: 1,
+  pageSize: 10,
+  allCount: 0
+})
+const queryString = qs.stringify({
+  fields: ['username', 'nickname', 'phone', 'main_point', 'createdAt', 'note'],
+  populate: {
+    group: {
+      fields: ['name']
+    },
+    login_logs: true
+  },
+  sort: ['id'],
+  // start: 2,
+  // limit: 2
+})
+
+const members = ref([])
 const fetchMembers = async (query) => {
-  const filterQuery = getFilterQuery(query)
-  try {
-    const response = await fetch('https://dispatch-net.onrender.com/api/users?fields[0]=username&fields[1]=nickname&fields[2]=phone&fields[3]=main_point&fields[4]=createdAt&fields[5]=note&populate[group][fields]=name&populate[login_logs][sort]=createdAt%3Adesc' + filterQuery, {
-      headers
-    })
-    const data = await response.json()
-    if (data?.error) throw new Error(data?.error?.message || 'fetch error')
-    members.value = data
-  } catch (err) {
-    console.log(err)
-  }
+  const { filterQuery, countFilterQuery } = getFilterQuery(query)
+  console.log(countFilterQuery)
+  pagination.allCount = await fetchWithToken(`/api/users/count?${countFilterQuery}`)
+  members.value = await fetchWithToken(`/api/users?${queryString}${filterQuery}`)
 }
 
-fetchMembers()
+fetchMembers(route.query)
 
 const addMember = async () => {
   try {
     let { username, password, nickname, phone, group, line_id, note } = memberDetail
-    if (!username || !password || !nickname || !phone || group === 0) throw new Error('欄位不得為空白')
+    if (!username || !password || !nickname || !phone || group === 0) {
+      alert('欄位不得為空白')
+      throw new Error('欄位不得為空白')
+    }
+
     group = Number(group)
-    console.log(typeof group, group)
-    const response = await fetch('https://dispatch-net.onrender.com/api/auth/local/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        nickname,
-        phone,
-        group,
-        line_id,
-        note,
-      }),
+    const data = await fetchWithoutToken('/api/auth/local/register', 'POST', {
+      username,
+      password,
+      nickname,
+      phone,
+      group,
+      line_id,
+      note,
     })
-    const data = await response.json()
-    console.log(data)
     if (data?.error) throw new Error(data.error.message)
     members.value.push({
       id: data?.user.id || 0,
@@ -334,15 +342,8 @@ const addMember = async () => {
       note,
       createdAt: data.user.createdAt,
     })
-    Object.assign(memberDetail, {
-      username: '',
-      nickname: '',
-      password: '',
-      phone: '',
-      group: 0,
-      line_id: '',
-      note: '',
-    })
+    fetchMembers(route.query)
+
   } catch (err) {
     console.log(err)
   }
@@ -380,5 +381,9 @@ form table label {
   @apply inline-block;
   @apply text-right;
   @apply w-full;
+}
+
+input {
+  padding: 0 8px;
 }
 </style>

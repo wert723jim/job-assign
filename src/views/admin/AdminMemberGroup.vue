@@ -1,6 +1,6 @@
 <template>
-  <AdminHeader></AdminHeader>
-  <AdminSider></AdminSider>
+  <AdminHeader />
+  <AdminSider />
   <main class="pl-40 h-full flex flex-col pt-11">
     <div>
       <h2 class="font-semibold text-lg px-3 py-2">員工群組</h2>
@@ -175,10 +175,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import AdminHeader from '../../components/admin/AdminHeader.vue'
-import AdminSider from '../../components/admin/AdminSider.vue'
-import AdminModal from '../../components/admin/AdminModal.vue'
+import fetchWithToken from '@utils/fetchFn'
 
 const memberGroups = ref([])
 const groupDetail = reactive({
@@ -188,18 +185,8 @@ const groupDetail = reactive({
 })
 
 const fetchMemberGroup = async () => {
-  try {
-    const response = await fetch('https://dispatch-net.onrender.com/api/groups?fields[0]=name&fields[1]=isDefault&fields[2]=point_baseline&populate[users][count]=1', {
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTcwMzE1MjE1NywiZXhwIjoxNzA1NzQ0MTU3fQ.6MnItXMM70Ce-24W6x1TNSVsko7VR_GcmSZggMQjq9A',
-      },
-    })
-    const { data } = await response.json()
-    if (!data) throw new Error('獲取群組資料失敗')
-    memberGroups.value = data
-  } catch (err) {
-    console.log(err)
-  }
+  const { data } = await fetchWithToken('/api/groups?fields[0]=name&fields[1]=isDefault&fields[2]=point_baseline&populate[users][count]=1')
+  memberGroups.value = data
 }
 
 fetchMemberGroup()

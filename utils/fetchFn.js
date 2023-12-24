@@ -30,8 +30,7 @@ export async function fetchWithoutToken(url, method = 'get', body = undefined) {
             method,
             body: JSON.stringify(body)
         })
-        const data = await res.json()
-        return data
+        return await res.json()
     } catch (err) {
         console.log('fetch error', url)
         console.log(err)

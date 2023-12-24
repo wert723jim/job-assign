@@ -28,7 +28,7 @@
       >
         <option value="">全部</option>
         <option
-          v-for="group in options.group"
+          v-for="group in props.groupOptions"
           :key="group.id"
           :value="group.id"
         >{{ group.name }}</option>
@@ -45,8 +45,8 @@
         v-model="queryData.isActive"
       >
         <option value="">全部</option>
-        <option value="true">停用</option>
-        <option value="false">啟用</option>
+        <option value="true">啟用</option>
+        <option value="false">停用</option>
       </select>
     </div>
     <div>
@@ -56,29 +56,12 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
-import getTokenAndHeader from '@utils/getTokenAndHeader.js'
-import { useRouter } from 'vue-router'
-
-const { headers } = getTokenAndHeader()
+const props = defineProps(['groupOptions'])
 
 const queryData = reactive({
   info: undefined,
-  groupId: undefined,
-  isActive: undefined
-})
-
-const options = reactive({
-  group: [],
-})
-
-
-onMounted(async () => {
-  const baseUrl = import.meta.env.VITE_BACKEND_HOST
-  const res = await fetch(baseUrl + '/api/groups?fields[0]=name', { headers })
-  const { data } = await res.json()
-
-  options.group = data?.map(group => ({ id: group.id, name: group.attributes.name }))
+  group: '',
+  isActive: ''
 })
 
 const router = useRouter()
@@ -90,7 +73,6 @@ const handleSubmit = () => {
       isActive: queryData.isActive || undefined,
     }
   })
-
 }
 
 </script>

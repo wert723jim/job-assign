@@ -39,7 +39,7 @@
           </svg>
         </div>
         <div>
-          Administrator
+          {{ nickname }}
         </div>
       </div>
     </div>
@@ -48,7 +48,9 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import fetchWithToken from '../../../utils/fetchFn'
+import fetchWithToken from '@utils/fetchFn'
+
+const nickname = ref('')
 
 const router = useRouter()
 const token = localStorage.getItem('token')
@@ -58,6 +60,7 @@ if (!token) {
 
 onMounted(async () => {
   const data = await fetchWithToken('/api/users/me')
+  nickname.value = data.nickname
   if (data.isAdmin !== true) {
     router.replace('/')
     alert('無管理者權限')
