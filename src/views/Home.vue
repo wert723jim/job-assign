@@ -18,12 +18,6 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import UserLayout from '@/components/user/Layout.vue'
-import UserProduct from '@/components/user/Product.vue'
-import UserSearchInput from '@/components/user/SearchInput.vue'
-
 const route = useRoute()
 const optionUrl = computed(() => route.query.search && `&filters[$and][1][name][$contains]=${route.query.search}`)
 

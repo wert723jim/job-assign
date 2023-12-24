@@ -24,8 +24,7 @@ const connectCustomService = inject('connectCustomService')
 
 const props = defineProps(['product'])
 
-const backendUrl = import.meta.env.VITE_BACKEND_HOST
-const imageUrl = backendUrl + props.product.attributes.image.data.attributes.url
+const imageUrl = props.product.attributes.image.data.attributes.url
 
 const handleClick = () => {
   if (props.product.attributes.url) {
