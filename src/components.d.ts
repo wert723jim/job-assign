@@ -11,6 +11,8 @@ declare module 'vue' {
     AdminAdminLayout: typeof import('./components/admin/AdminLayout.vue')['default']
     AdminAdminModal: typeof import('./components/admin/AdminModal.vue')['default']
     AdminAdminSider: typeof import('./components/admin/AdminSider.vue')['default']
+    AdminFormBulletinBoardForm: typeof import('./components/admin/form/BulletinBoardForm.vue')['default']
+    AdminFormMemberGroupForm: typeof import('./components/admin/form/MemberGroupForm.vue')['default']
     AdminHeader: typeof import('./components/admin/Header.vue')['default']
     AdminLayout: typeof import('./components/admin/Layout.vue')['default']
     AdminModal: typeof import('./components/admin/Modal.vue')['default']

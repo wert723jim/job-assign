@@ -22,7 +22,13 @@
                 新增公告
               </template>
               <template v-slot:content>
-                <BulletinBoardForm></BulletinBoardForm>
+                <BulletinBoardForm @confirm="addAnnouncement">
+                  <template v-slot:formButton>
+                    <span class="bg-[#2055A5] text-white px-5 py-1">
+                      新增
+                    </span>
+                  </template>
+                </BulletinBoardForm>
               </template>
             </AdminModal>
           </div>
@@ -64,27 +70,56 @@
                   {{ announcement.id}}
                 </td>
                 <td>
-                  {{ announcement.attributes.publishedAt}}
+                  {{ announcement.createdAt}}
                 </td>
                 <td>
-                  {{ announcement.attributes.title }}
+                  {{ announcement.title }}
                 </td>
                 <td>
-                  <select name="bulletinState">
-                    <option value="1" selected>啟用</option>
+                  <select name="bulletinState" v-model="announcement.isActive">
+                    <option value="true" selected>啟用</option>
+                    <option value="false">停用</option>
                   </select>
                 </td>
                 <td>
-                  <select name="newsTickerState">
-                    <option value="1" selected>啟用</option>
+                  <select name="newsTickerState" v-model="announcement.isMarquee" @click.prevent.stop>
+                    <option value="true" selected>啟用</option>
+                    <option value="false">停用</option>
                   </select>
                 </td>
                 <td>
                   <div class="flex justify-center gap-1">
-                    <button class="bg-[#2055A5] text-white px-5 py-1">
-                      修改
-                    </button>
-                    <button class="bg-[#D92F14] text-white px-5 py-1">
+                    <AdminModal>
+                      <template v-slot:buttonContent>
+                        <span>
+                          <span
+                            class="inline-block text-white px-5 py-1 bg-[#2055A5]"
+                          >
+                            修改
+                          </span>
+                        </span>
+                      </template>
+                      <template v-slot:header>
+                        修改公告
+                      </template>
+                      <template v-slot:content>
+                        <BulletinBoardForm 
+                          @confirm="editAnnouncement"
+                          :id ="announcement.id"
+                          :title="announcement.title"
+                          :content="announcement.content"
+                          :isActive="announcement.isActive"
+                          :isMarquee="announcement.isMarquee"
+                        >
+                          <template v-slot:formButton>
+                            <span class="bg-[#2055A5] text-white px-5 py-1">
+                              修改
+                            </span>
+                          </template>
+                        </BulletinBoardForm>
+                      </template>
+                    </AdminModal>
+                    <button @click.prevent.stop="removeAnnouncement(announcement.id)" class="bg-[#D92F14] text-white px-5 py-1">
                       刪除
                     </button>
                   </div>
@@ -100,25 +135,58 @@
 
 <script setup>
 import { ref } from 'vue'
+import fetchWithToken from '@utils/fetchFn'
 import BulletinBoardForm from '../../components/admin/form/BulletinBoardForm.vue'
-import AdminModal from '../../components/admin/AdminModal.vue'
-import AdminLayout from '../../components/admin/AdminLayout.vue'
+import AdminModal from '../../components/admin/Modal.vue'
+import AdminLayout from '../../components/admin/Layout.vue'
 
 const announcements = ref([])
 
 const fetchAnnouncements = async () => {
-  try {
-    const response = await fetch('https://dispatch-net.onrender.com/api/announcements')
-    const { data } = await response.json()
-    console.log(data)
-    if (data?.error) throw new Error(data?.error?.message || 'fetch error')
-    announcements.value = data
-  } catch (err) {
-    console.log(err)
-  }
-  
+  const { data } = await fetchWithToken('/api/announcements')
+  announcements.value = data.map(d => ({
+    id: d.id,
+    ...d.attributes,
+  }))
 }
 fetchAnnouncements()
+
+const addAnnouncement = async (formDetail) => {
+  delete formDetail['id']
+  const postBody = {
+    data: formDetail
+  }
+  const { data } = await fetchWithToken('/api/announcements', 'POST', postBody)
+  console.log(data)
+}
+
+const editAnnouncement = async (formDetail) => {
+  const postBody = {
+    data: formDetail
+  }
+  const { data } = await fetchWithToken(`/api/announcements/${formDetail.id}`, 'PUT', postBody)
+  console.log(data)
+  if (!data) return 
+  announcements.value = announcements.value.map(announcement => {
+    if (announcement.id === data.id) {
+      return {
+        id: data.id,
+        ...data.attributes,
+      }
+    }
+    return announcement
+  })
+}
+const removeAnnouncement = async (id) => {
+    const confirmRemove = confirm(`確定刪除公告編號${id}?`)
+
+    if (!confirmRemove) return
+
+    const { data } = await fetchWithToken(`/api/announcements/${id}`, 'DELETE')
+    if (data) {
+      announcements.value = announcements.value.filter(announcement => announcement.id !== data.id)
+    }
+}
 </script>
 
 <style scoped>
